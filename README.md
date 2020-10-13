@@ -1,6 +1,7 @@
 # Django Machine Learning
  
 ## Required tool
+```json
 argon2-cffi==20.1.0
 asgiref==3.2.10
 async-generator==1.10
@@ -71,3 +72,4 @@ traitlets==5.0.4
 wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
+```
