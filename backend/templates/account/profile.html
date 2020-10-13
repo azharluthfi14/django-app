@@ -1,0 +1,171 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    {% include "snippets/styles.html" %}
+    <style>
+        *,
+        *:focus,
+        *:hover {
+            outline: none;
+        }
+    </style>
+</head>
+<style>
+    .form-text {
+        display: none;
+    }
+
+    .asteriskField {
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="wrapper">
+        <nav id="sidebar" class="shadow">
+            <div class="sidebar-header">
+                <img class="mr-2" src="{% static "img/ico.ico" %}" alt="">
+                Dashboard
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="{% url 'app:dashboard' %}"><i class="fas fa-home"></i>Home</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-table"></i>Results</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fab fa-wpforms"></i>Forms</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-chart-bar"></i>Chart</a>
+                </li>
+                <li class="active">
+                    <a href="{% url 'app:profile'  %}"><i class="fas fa-user icon-user"></i>Account</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-tools"></i>Tools</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-file-alt"></i></i>Data</a>
+                </li>
+                <li>
+                    <a href="#themeMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
+                            class="fas fa-palette"></i>Display</a>
+                    <ul class="collapse list-unstyled" id="themeMenu">
+                        <li>
+                            <div class="custom-control custom-switch ml-5">
+                                <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+                                <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="content">
+            <nav class="navbar navbar-expand-sm navbar-light bg-light shadow">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-light btn-sidebar mr-3">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <button class="btn avatar-btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <div class="dropdown avatar">
+                                    <button class="btn btn-profile dropdown-toggle" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Hello, {{ request.user.username }}<img src="{{user.profile.image.url}}"
+                                            class="profil_pict rounded-circle mr-4 ml-2" alt="">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="{% url  'app:profile' %}"><i
+                                                class="far fa-id-card mr-3"></i>Profile</a>
+                                        <a class="dropdown-item" href="{% url 'app:logout' %}"><i
+                                                class="fas fa-sign-out-alt mr-3"></i>Log out</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="block-content">
+                <div class="container">
+                    <div class="mt-4 card-profile shadow">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert mb-3 alert-{% if message.tags == 'error'%}danger{% else %}{{message.tags}}{% endif %}"
+                            role="alert">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        <form method="POST" enctype="multipart/form-data" autocomplete="off">
+                            <div class="row">
+                                <div class="col-sm-3 account-desc">
+                                    <div class="avatar-profile">
+                                        <img class="profile-image rounded-circle" src="{{ user.profile.image.url }}">
+                                    </div>
+                                    <div class=" btn button-image">
+                                        <i class="fa fa-camera upload-button"></i>
+                                        <input name="image" id="id_image" class="file-upload" type="file"
+                                            accept="image/*" />
+                                    </div>
+                                </div>
+                                <div class="col mt-5">
+                                    {% csrf_token %}
+                                    {{ user_form|crispy }}
+                                    <div class="form-group">
+                                        <button id="button" class="btn myBtn btn-block mt-4" type="submit">Update
+                                            profile</button>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+{% include "snippets/scripts.html" %}
+
+<script>
+    $(document).ready(function () {
+        const readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.profile-image').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+
+        $(".upload-button").on('click', function () {
+            $(".file-upload").click();
+        });
+    });
+</script>
+
+</html>

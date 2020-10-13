@@ -1,0 +1,196 @@
+[data-theme="dark"] 
+{
+  background-color: #23272a !important;
+  color: #eee !important;
+}
+
+[data-theme="dark"] .btn-sidebar
+{
+  background-color: #2c2f33 !important;
+  color: #fff;
+  border: none;
+}
+
+[data-theme="dark"] .bg-white 
+{
+  background-color: #000 !important;
+}
+
+[data-theme="dark"] .bg-black 
+{
+  background-color: #eee !important;
+}
+
+[data-theme="dark"] #sidebar 
+{
+  background-color: #2c2f33 !important; 
+  color: #eee !important;
+}
+
+[data-theme="dark"] .sidebar-header 
+{
+  background-color: #2c2a2a !important;
+  color: #eee !important;
+}
+
+[data-theme="dark"] .myCard 
+{
+  background-color: #2c2f33 ;
+  color: #eee !important;
+}
+
+[data-theme="dark"] .heading-form  
+{
+  color: #eee !important;
+}
+
+[data-theme="dark"] ul li a  
+{
+  color: #eee !important;
+  background-color: #2c2f33;
+}
+
+[data-theme="dark"] ul li a:hover  
+{
+  color: #ff5722 !important;
+  background: #3b3f44 !important;
+  border-left: 5px solid #ff5722 !important;
+}
+
+[data-theme="dark"] #sidebar ul li a 
+{
+  border-left: 5px solid #2c2f33;
+}
+
+[data-theme="dark"] .navbar
+{
+  background: #2c2f33 !important;
+}
+
+/* [data-theme="dark"] .card-item 
+{
+  background: #2c2f33 !important;
+} */
+
+[data-theme="dark"] .card-profile
+{
+  background: #2c2f33 !important;
+}
+
+[data-theme="dark"] .text-card-item
+{
+ color: #fff;
+}
+
+[data-theme="dark"] .main-year
+{
+  background: #fa6908;
+}
+
+[data-theme="dark"] #monthAndYear
+{
+  color: #fff;
+}
+
+[data-theme="dark"] .btn-calendar
+{
+  background: #ff8d4b;
+}
+
+[data-theme="dark"] .btn-profile
+{
+  background: #ff8d4b;
+  color: #fff;
+}
+
+[data-theme="dark"] .date-picker
+{
+  
+  color: #fff;
+}
+
+[data-theme="dark"] th
+{
+  color: #fff;
+}
+
+[data-theme="dark"] .dropdown-menu
+{
+  background: #2c2f33;
+}
+
+[data-theme="dark"] .heading-class
+{
+  color: #fff;
+}
+[data-theme="dark"] hr
+{
+  background: #fff;
+}
+
+[data-theme="dark"] .form-control
+{
+  background: #3b3f44;
+  border: none;
+  color: #fff;
+}
+
+[data-theme="dark"] .heading-card-profile
+{ 
+  color: #fff;
+}
+
+[data-theme="dark"] #sl
+{
+  color: #fff;
+}
+[data-theme="dark"]  #sw
+{
+  color: #fff;
+}
+[data-theme="dark"]  #pl
+{
+  color: #fff;
+}
+[data-theme="dark"]  #pw
+{
+  color: #fff;
+}
+
+[data-theme="dark"] #month
+{
+  background: #2c2f33;
+  color: #fff;
+}
+
+
+[data-theme="dark"] #year
+{
+  background: #2c2f33;
+  color: #fff;
+}
+
+[data-theme="dark"] ul li.active > a, a[aria-expanded="true"]
+{
+    color: #ff5722 !important;
+    border-left: 5px solid #ff5722 !important;
+    background: #3b3f44;
+}
+
+[data-theme="dark"] .clearablefileinput
+{
+  background: #2c2f33;
+  color: #fff;
+}
+
+[data-theme="dark"] td
+{
+  color: #fff !important;
+  text-align: center;
+}
+
+[data-theme="dark"] .list-unstyled .dropdown-toggle
+{
+
+  background: #2c2f33 !important;
+}

@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    {% include "snippets/styles.html" %}
+    <style>
+        *,
+        *:focus,
+        *:hover {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="shadow-sm">
+            <div class="sidebar-header">
+                <img class="mr-2" src="{% static "img/ico.ico" %}" alt="">
+                Dashboard
+
+            </div>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="{% url 'app:dashboard' %}"><i class="fas fa-home"></i>Home</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-table"></i>Results</a>
+                </li>
+                <li>
+                    <a href="{% url 'app:predict' %}"><i class="fab fa-wpforms"></i>Forms</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-chart-bar"></i>Chart</a>
+                </li>
+                <li>
+                    <a href="{% url 'app:profile' %}"><i class="fas fa-user icon-user"></i>Account</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-tools"></i>Tools</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-file-alt"></i>Data</a>
+                </li>
+                <li>
+                    <a href="#themeMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
+                            class="fas fa-palette"></i>Theme</a>
+                    <ul class="collapse list-unstyled" id="themeMenu">
+                        <li>
+                            <div class="custom-control custom-switch ml-5">
+                                <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+                                <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="content">
+            <nav class="navbar navbar-expand-sm navbar-light bg-light shadow-sm">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-light btn-sidebar mr-3">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <ul class="nav myNavbar navbar-expand-sm navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <div class="dropdown avatar">
+                                <button class="btn btn-profile dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Hello, {{ request.user.username }}<img src="{{ user.profile.image.url }}"
+                                        class="profil_pict rounded-circle mr-4 ml-2" alt="">
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{% url 'app:profile' %}"><i
+                                            class="far fa-id-card mr-3"></i>Profile</a>
+
+                                    <a class="dropdown-item" href="{% url 'app:logout' %}"><i
+                                            class="fas fa-sign-out-alt mr-3"></i>Log out</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+            <div class="block-content">
+                <div class="container menu-content">
+                    <div class="row mt-4 ">
+                        <div class="col-sm card-item shadow mr-1">
+                            <div class="row">
+                                <div class="circle"></div>
+                                <div class="circle2"></div>
+                                <div class="col">
+                                    <h5 class="text-card-item">Statistic Data</h5>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="{% static "img/bar-chart.svg" %}">
+
+                        </div>
+                        <div class="col-sm card-item2 mr-1">
+                            <div class="row">
+                                <div class="circle"></div>
+                                <div class="circle2"></div>
+                                <div class="col">
+                                    <h5 class="text-card-item">Analysis Data</h5>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="{% static "img/pie-chart.svg" %}">
+                            <button class="btn btn-sm btn-light mt-5 float-right">Process</button>
+                        </div>
+                        <div class="col-sm card-item3">
+                            <div class="row">
+                                <div class="circle"></div>
+                                <div class="circle2"></div>
+                                <div class="col">
+                                    <h5 class="text-card-item">Report Data</h5>
+                                </div>
+                            </div>
+                            <img class="img-fluid" src="{% static "img/report.svg" %}">
+                            <button class="btn btn-sm btn-light mt-5 float-right">Look report</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="myCard  mr-3 col-sm-7 mt-4">
+                            <div class="form-inline">
+                                <button class="btn btn-info mb-4 mr-3"><i class="fas fa-plus-square"></i> Add
+                                </button>
+                                <button class="btn myBtn2 mb-4 mr-3"><i class="fas fa-trash-alt"></i></button>
+                                <button class="btn myBtn2 mb-4"><i class="fas fa-backspace"></i></button>
+                            </div>
+                            <canvas id="chart-algorithm" height="300" width="300"></canvas>
+                        </div>
+                        <div class=" col-sm myCard h-50 calendar mt-4">
+                            <div class="card-calendar">
+                                <div class="row main-year">
+                                    <div class="col year_month">
+                                        <h5 class="month font-weight-bold mt-2" id="monthAndYear"></h5>
+                                    </div>
+                                    <div class="col-5 button-change">
+                                        <div class="float-right">
+                                            <button class="btn btn-calendar" id="previous" onclick="previous()"><i
+                                                    class="fas fa-chevron-left"></i></button>
+                                            <button class="btn  btn-calendar" id="next" onclick="next()"><i
+                                                    class="fas fa-chevron-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-card">
+                                <div class="container-calendar">
+                                    <table class=" table table-borderless" id="calendar" data-lang="en">
+                                        <thead id="thead-month"></thead>
+                                        <tbody id="calendar-body"></tbody>
+                                    </table>
+                                    <div class="footer-container-calendar">
+                                        <label for="month">Jump To: </label>
+                                        <select id="month" onchange="jump()">
+                                            <option value=0>Jan</option>
+                                            <option value=1>Feb</option>
+                                            <option value=2>Mar</option>
+                                            <option value=3>Apr</option>
+                                            <option value=4>May</option>
+                                            <option value=5>Jun</option>
+                                            <option value=6>Jul</option>
+                                            <option value=7>Aug</option>
+                                            <option value=8>Sep</option>
+                                            <option value=9>Oct</option>
+                                            <option value=10>Nov</option>
+                                            <option value=11>Dec</option>
+                                        </select>
+                                        <select id="year" onchange="jump()"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% include "snippets/scripts.html" %}
+
+</html>

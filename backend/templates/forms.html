@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    {% include "snippets/styles.html" %}
+    <style>
+        *,
+        *:focus,
+        *:hover {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav id="sidebar" class="shadow">
+            <div class="sidebar-header">
+                <img class="mr-2" src="{% static "img/ico.ico" %}" alt="">
+                Dashboard
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="{% url 'app:dashboard' %}"><i class="fas fa-home"></i>Home</a>
+
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-table"></i>Results</a>
+                </li>
+                <li class="active">
+                    <a href="{% url 'app:predict' %}"><i class="fab fa-wpforms"></i>Forms</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-chart-bar"></i>Chart</a>
+                </li>
+                <li>
+                    <a href="{% url 'app:profile'%}"><i class="fas fa-user icon-user"></i>Account</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-tools"></i>Tools</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-file-alt"></i>Data</a>
+                </li>
+                <li>
+                    <a href="#themeMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i
+                            class="fas fa-palette"></i>Display</a>
+                    <ul class="collapse list-unstyled" id="themeMenu">
+                        <li>
+                            <div class="custom-control custom-switch ml-5">
+                                <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+                                <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="content">
+            <nav class="navbar navbar-expand-sm navbar-light bg-light shadow">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-light btn-sidebar mr-3">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <button class="btn avatar-btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <div class="dropdown avatar">
+                                    <button class="btn btn-profile dropdown-toggle" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Hello, {{ request.user.username }}<img src="{{user.profile.image.url}}"
+                                            class="profil_pict rounded-circle mr-4 ml-2" alt="">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="{% url 'app:profile' %}"><i
+                                                class="far fa-id-card mr-3"></i>Profile</a>
+                                        <a class="dropdown-item" href="{% url 'app:logout' %}"><i
+                                                class="fas fa-sign-out-alt mr-3"></i>Log out</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="block-content">
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-md-5 myCard shadow mr-2">
+                            <h1 class="heading-form">Form Variable</h1>
+                            <form action="" id="post-form" autocomplete="off">
+                                {% csrf_token %}
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="sepal_length">Fixed acidity</label>
+                                        <input type="number" step="0.1" class="form-control" id="fixed_acidity"
+                                            placeholder="" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="Sepal Width">Volatile acidity</label>
+                                        <input type="number" step="0.1" class="form-control" id="volatile_acidity"
+                                            placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="petal_length">Critic acid</label>
+                                        <input type="number" step="0.1" class="form-control" id="citric_acid"
+                                            placeholder="" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="petal_width">Residual sugar</label>
+                                        <input type="number" step="0.1" class="form-control" id="residual_sugar"
+                                            placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="petal_width">Chlorides</label>
+                                        <input type="number" step="0.1" class="form-control" id="chlorides"
+                                            placeholder="" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="petal_width">Free sulfur dioxide</label>
+                                        <input type="number" step="0.1" class="form-control" id="free_sulfur_dioxide"
+                                            placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="petal_width">Total sulfur dioxide</label>
+                                        <input type="number" step="0.1" class="form-control" id="total_sulfur_dioxide"
+                                            placeholder="" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="petal_width">Density</label>
+                                        <input type="number" step="0.1" class="form-control" id="density" placeholder=""
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="petal_width">pH</label>
+                                        <input type="number" step="0.1" class="form-control" id="pH" placeholder=""
+                                            required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="petal_width">Sulphates</label>
+                                        <input type="number" step="0.1" class="form-control" id="sulphates"
+                                            placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm">
+                                        <label for="petal_width">Alcohol</label>
+                                        <input type="number" step="0.1" class="form-control" id="alcohol" placeholder=""
+                                            required>
+                                    </div>
+                                </div>
+                                <button id="process" type="submit" value="Submit"
+                                    class="btn myBtn btn-block">Submit</button>
+                            </form>
+                        </div>
+                        <div class="col">
+                            <div class="my-chart mt-2 myCard shadow">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                            <div class="my-table myCard mt-3 shadow">
+                                <h3 class="heading-form">Variable Input</h3>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="col-var" scope="col">Fixed acidity</th>
+                                                <th class="col-var" scope="col">Volatile acidity</th>
+                                                <th class="col-var" scope="col">Critic acid</th>
+                                                <th class="col-var" scope="col">Residual sugar</th>
+                                                <th class="col-var" scope="col">Chlorides</th>
+                                                <th class="col-var" scope="col">Free sulfur</th>
+                                                <th class="col-var" scope="col">Total sulfur</th>
+                                                <th class="col-var" scope="col">Density</th>
+                                                <th class="col-var" scope="col">pH</th>
+                                                <th class="col-var" scope="col">Sulphates</th>
+                                                <th class="col-var" scope="col">Alcohol</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class"var-wine"><span id="fa"></span></td>
+                                                <td><span id="va"></span></td>
+                                                <td><span id="ca"></span></td>
+                                                <td><span id="rs"></span></td>
+                                                <td><span id="c"></span></td>
+                                                <td><span id="fsd"></span></td>
+                                                <td><span id="tsd"></span></td>
+                                                <td><span id="d"></span></td>
+                                                <td><span id="ph"></span></td>
+                                                <td><span id="s"></span></td>
+                                                <td><span id="a"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <h5 class="heading-form mt-5">Prediction Classification : <span id="prediction"></span>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+{% include "snippets/scripts.html" %}
+
+</html>
+
+</html>

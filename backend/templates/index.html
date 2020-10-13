@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+    <link rel="stylesheet" href="{% static "css/animate.min.css" %}">
+    <link rel="shortcut icon" href="{% static "img/ico.ico" %}">
+    <title>Home</title>
+</head>
+
+<body id="landing-page">
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <div class="container title-navbar">
+            <a class="navbar-brand text-white" href="#">
+                <img class="mr-2" src="{% static "img/ico.ico" %}" alt="">Dashboard.
+            </a>
+        </div>
+    </nav>
+    <div class="container container-fluid">
+        <div class="row">
+            <div class="col-sm title-heading animate__animated animate__fadeInDown">
+                <h1>Welcome,</h1>
+                <p class="text-white mt-4">Machine learning app with django framework. Easy to use and user friendly.
+                </p>
+                <div class="button-page">
+                    <div class="row">
+                        <div class="col-md mt-3">
+                            <a href="{% url 'app:signin'%}" class="btn btn-index-signin mr-3 shadow">Sign in</a>
+                            <a href="{% url 'app:signup'%}" class=" btn btn-index-signup shadow">Sign up</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm image-page">
+                <img class="animate__animated animate__rubberBand"
+                    src="{% static "img/—Pngtree—data science isometric illustration concept_4860367.png" %}" alt="">
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</html>

@@ -1,0 +1,98 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+        crossorigin="anonymous" />
+	<link rel="stylesheet" href="{% static "css/styles.css" %}">
+	<link rel="stylesheet" href="{% static "css/animate.min.css" %}" />
+	<link rel="shortcut icon" href="{% static "img/ico.ico" %}">
+	<title>Register Account</title>
+</head>
+<style>
+	/* .form-text {
+		display: none;
+	} */
+
+	.asteriskField {
+		display: none;
+	}
+</style>
+
+<body id="signup">
+	<div class="container">
+	 <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+            <div class="container title-navbar">
+                <a class="navbar-brand text-white" href="{% url 'app:index' %}">
+                    <img class="mr-2" src="{% static "img/ico.ico" %}" alt="">Dashboard.
+                </a>
+            </div>
+        </nav>
+		<div class="row">
+			<div class="col"></div>
+			<div class="col-sm register-form">
+				<h3 class="mb-4 text-white font-weight-bold">Register <span style="color:#fa682e;">New Account</span>
+				</h3>
+				<form method="POST" autocomplete="off" id="form-signup">
+					{% csrf_token %}
+					{{ form.username | as_crispy_field }}
+					{{ form.email | as_crispy_field }}
+					{{ form.password1 | as_crispy_field }}
+					{{ form.password2 | as_crispy_field }}
+					<div class="form-group form-check">
+						<input onclick="showPass()" type="checkbox" class="form-check-input" id="exampleCheck1">
+						<label class="form-check-label" for="exampleCheck1">Show password</label>
+					</div>
+					<button type="submit" class="btn myBtn btn-block shadow" id="myBtn">Create
+						account</button>
+				</form>
+				<div class="mt-4">
+					<div class="links text-white">
+						Already have an account ? <a href={% url 'app:signin' %} class="ml-2 text-primary">Sign
+							in</a>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
+<script>
+	function showPass() {
+		const showpass = document.getElementById("id_password1")
+		const confirmPass = document.getElementById("id_password2")
+		if (showpass.type && confirmPass.type === "password") {
+			showpass.type = "text";
+			confirmPass.type = "text";
+
+		} else {
+			showpass.type = "password";
+			confirmPass.type = "password";
+
+		}
+	}
+
+	// $(function () {
+	// 	$("#id_email")
+	// 		.popover()
+	// 		.blur(function () {
+	// 			$(this).popover('hide');
+	// 		});
+
+	// 	$("#id_password1")
+	// 		.popover()
+	// 		.blur(function () {
+	// 			$(this).popover('hide');
+	// 		});
+	// });
+</script>
+
+</html>
